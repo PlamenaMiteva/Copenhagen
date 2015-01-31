@@ -1,0 +1,33 @@
+import java.awt.*;
+
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class Score extends JPanel {
+
+    private JFrame frame = new JFrame("Test");
+    private JPanel panel = new JPanel();
+    private JLabel label = new JLabel("CenteredJLabel");
+
+    public Score() {
+        panel.setLayout(new GridBagLayout());
+        panel.add(label);
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.add(panel);
+        frame.setSize(400, 300);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                @SuppressWarnings("unused")
+				Score centeredJLabel = new Score();
+            }
+        });
+    }
+}
