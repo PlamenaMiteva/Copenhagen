@@ -6,15 +6,26 @@ import javax.swing.*;
 public class Player {
 	public int playerX, playerY;
 	public Image playerImage;
+	public int velocity;
 	private int wins; // Amount of labyrinths passed
 
-	public Player() {
+	public static boolean goingUp;
+    public static boolean goingDown;
+    public static boolean goingLeft;
+    public static boolean goingRight;
+    
+	public Player(int paraX, int paraY) {
 
 		ImageIcon image = new ImageIcon("player.png");
 		
+		goingUp = false;
+        goingDown = false;
+        goingLeft = false;
+        goingRight = false;
+		
 		this.playerImage = image.getImage();
-		this.playerX = 1;
-		this.playerY = 1;
+		this.playerX = paraX;
+		this.playerY = paraY;
 		this.wins = 0;
 
 	}

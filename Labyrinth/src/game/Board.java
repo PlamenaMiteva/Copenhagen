@@ -9,11 +9,13 @@ public class Board extends JPanel implements ActionListener {
 	public Timer timer;
 	public Player player;
 	public Map m;
+	public Enemy enemy;
 	private int level = 1;
 
 	public Board() {
-		player = new Player();
 		m = new Map(level);
+		player = new Player(1,1);
+		enemy = new Enemy(2,2);
 
 		addKeyListener(new ActionsTaken());
 		setFocusable(true);
@@ -27,18 +29,20 @@ public class Board extends JPanel implements ActionListener {
 
 		for (int y = 0; y < 14; y++) {
 			for (int x = 0; x < 28; x++) {
-				if (m.getMap(x, y).equals("g")) {
+				if (m.getMap(x, y).equals("0")) {
 					g.drawImage(m.getGround(), x * 32, y * 32, null);
-				} else if (m.getMap(x, y).equals("w")) {
+				} else if (m.getMap(x, y).equals(".")) {
 					g.drawImage(m.getWall(), x * 32, y * 32, null);
 				} else if (m.getMap(x, y).equals("e")) {
 					g.drawImage(m.getExit(), x * 32, y * 32, null);
-				} else if (m.getMap(x, y).equals("d")) {
+				} else if (m.getMap(x, y).equals("x")) {
 					g.drawImage(m.getDoor(), x * 32, y * 32, null);
 				}
 			}
 		}
 		g.drawImage(player.getPlayer(), player.getX() * 32, player.getY() * 32,
+				null);
+		g.drawImage(enemy.getPlayer(), enemy.getX() * 32, enemy.getY() * 32,
 				null);
 	}
 
@@ -53,8 +57,10 @@ public class Board extends JPanel implements ActionListener {
 			if (dialogResult == JOptionPane.YES_OPTION) {
 				level++;
 				JOptionPane.getRootFrame();
-				player = new Player();
 				m = new Map(level);
+
+				player = new Player(1,1);
+				
 			} else {
 				System.exit(0);
 			}
@@ -69,35 +75,35 @@ public class Board extends JPanel implements ActionListener {
 
 			// up
 			if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
-				if (!m.getMap(player.getX(), player.getY() - 1).equals("w")
+				if (!m.getMap(player.getX(), player.getY() - 1).equals(".")
 						&& !m.getMap(player.getX(), player.getY() - 1).equals(
-								"d")) {
+								"x")) {
 					player.move(0, -1);
 				}
 			}
 
 			// down
 			else if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
-				if (!m.getMap(player.getX(), player.getY() + 1).equals("w")
+				if (!m.getMap(player.getX(), player.getY() + 1).equals(".")
 						&& !m.getMap(player.getX(), player.getY() + 1).equals(
-								"d")) {
+								"x")) {
 					player.move(0, 1);
 				}
 			}
 
 			// left
 			else if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
-				if (!m.getMap(player.getX() - 1, player.getY()).equals("w")
+				if (!m.getMap(player.getX() - 1, player.getY()).equals(".")
 						&& !m.getMap(player.getX() - 1, player.getY()).equals(
-								"d")) {
+								"x")) {
 					player.move(-1, 0);
 				}
 			}
 			// right
 			else if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
-				if (!m.getMap(player.getX() + 1, player.getY()).equals("w")
+				if (!m.getMap(player.getX() + 1, player.getY()).equals(".")
 						&& !m.getMap(player.getX() + 1, player.getY()).equals(
-								"d")) {
+								"x")) {
 					player.move(1, 0);
 				}
 			}
