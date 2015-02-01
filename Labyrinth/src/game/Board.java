@@ -6,16 +6,17 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener {
-	public Timer timer;
-	public Player player;
-	public Map m;
-	public Enemy enemy;
+	private Timer timer;
+	private Player player;
+	private Map m;
+	private Enemy enemy;
 	private int level = 1;
 
 	public Board() {
 		m = new Map(level);
 		player = new Player(1,1);
 		enemy = new Enemy(2,2);
+
 
 		addKeyListener(new ActionsTaken());
 		setFocusable(true);
@@ -38,12 +39,14 @@ public class Board extends JPanel implements ActionListener {
 				} else if (m.getMap(x, y).equals("x")) {
 					g.drawImage(m.getDoor(), x * 32, y * 32, null);
 				}
+				
 			}
 		}
 		g.drawImage(player.getPlayer(), player.getX() * 32, player.getY() * 32,
 				null);
-		g.drawImage(enemy.getPlayer(), enemy.getX() * 32, enemy.getY() * 32,
+		g.drawImage(enemy.getEnemy(), enemy.getX() * 32, enemy.getY() * 32,
 				null);
+	
 	}
 
 	public void actionPerformed(ActionEvent e) {

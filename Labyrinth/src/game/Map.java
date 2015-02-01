@@ -8,10 +8,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Map {
-	public Scanner input;
-	public int size;
-	public String[] map; //size is the length of the first line in a map
-	public Image ground, wall, exit, door;
+	private Scanner input;
+	private int size;
+	private String[] map; //size is the length of the first line in a map
+	private Image ground, wall, exit, door;
 	int level;
 
 	public Map(int Level) {

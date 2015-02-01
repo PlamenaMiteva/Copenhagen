@@ -5,8 +5,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Enemy {
-	public int x, y;
-	public Image enemyImage;
+	private int x, y;
+	private Image enemyImage;
 
 	public Enemy(int enemyX, int enemyY) {
 
@@ -18,7 +18,7 @@ public class Enemy {
 
 	}
 
-	public Image getPlayer() {
+	public Image getEnemy() {
 		return enemyImage;
 	}
 

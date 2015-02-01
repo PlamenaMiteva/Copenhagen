@@ -8,7 +8,7 @@ public class Labyrinth extends JFrame {
 		add(new Board());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Labyrinth");
-		setSize(880, 450);
+		setSize(900, 450);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);

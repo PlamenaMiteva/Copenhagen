@@ -4,9 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Player {
-	public int playerX, playerY;
-	public Image playerImage;
-	public int velocity;
+	private int playerX, playerY;
+	private Image playerImage;
+	private int velocity;
 	private int wins; // Amount of labyrinths passed
 
 	public static boolean goingUp;
