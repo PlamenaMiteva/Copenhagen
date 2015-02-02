@@ -50,7 +50,7 @@ public class Map {
 		
 		String filename = "map" + level + ".txt";
 
-		if (level < 5) {  // due to 4 maps in src
+		if (level < 3) {  // due to 2 maps in src
 			try {
 				input = new Scanner(new File(filename));
 			} catch (Exception e) {
@@ -66,7 +66,7 @@ public class Map {
 					"Would you Like to start over?", "YOU WON", dialogButton);
 
 			if (dialogResult == JOptionPane.YES_OPTION) {
-
+				
 				new Labyrinth();
 			} else {
 				System.exit(0);
