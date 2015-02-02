@@ -13,27 +13,28 @@ public class Board extends JPanel implements ActionListener {
 	private Timer timer;
 	private Player player;
 	private Map m;
-//	private Enemy enemy;
+	// private Enemy enemy;
 	private int level = 1;
 	private String moveDirection = null;
 	private int moveIndex = 0;
+	private int count = 0;
 
 	public Board() {
 		m = new Map(level);
 		player = new Player(1, 1, null, 0);
-//		enemy = new Enemy(5,9);
-//		Thread enemy1 = new Thread(thr1);
+		// enemy = new Enemy(5,9);
+		// Thread enemy1 = new Thread(thr1);
 
 		addKeyListener(new ActionsTaken(this));
 		setFocusable(true);
 
-		timer = new Timer(25, this);
+		timer = new Timer(280, this);
 		timer.start();
 	}
 
 	public void paint(Graphics g) {
 		super.paintComponents(g);
-//		Thread enemy1 = new Thread();
+		// Thread enemy1 = new Thread();
 
 		for (int y = 0; y < 14; y++) {
 			for (int x = 0; x < 28; x++) {
@@ -42,16 +43,32 @@ public class Board extends JPanel implements ActionListener {
 				} else if (m.getMap(x, y).equals(".")) {
 					g.drawImage(m.getWall(), x * 32, y * 32, null);
 				} else if (m.getMap(x, y).equals("e")) {
-					g.drawImage(m.getExit(), x * 32, y * 32,  null);
+					g.drawImage(m.getExit(), x * 32, y * 32, null);
 				} else if (m.getMap(x, y).equals("x")) {
 					g.drawImage(m.getDoor(), x * 32, y * 32, null);
-				}else if (m.getMap(x, y).equals("N")) {
-					g.drawImage(m.getEnemy(), x * 32, y * 32, null);
+				} else if (m.getMap(x, y).equals("N")) {
+					if (count > 10 && count <= 20) {
+						g.drawImage(m.getEnemy(), ((x - 1) * 32), y * 32, null);						
+					} else if (count > 20 && count <= 30) {
+						g.drawImage(m.getEnemy(), ((x - 2) * 32), y * 32, null);
+
+					} else if (count > 30 && count <= 40) {
+						g.drawImage(m.getEnemy(), ((x - 1) * 32), y * 32, null);
+
+					} else {
+						g.drawImage(m.getEnemy(), x * 32, y * 32, null);
+					}
+					if (count > 40) {
+						count = 0;
+					}
 				}
 			}
 		}
+		count++;
+		System.out.print(count);
 
-		g.drawImage(player.getPlayer(moveDirection, moveIndex), player.getX() * 32, player.getY() * 32, null);
+		g.drawImage(player.getPlayer(moveDirection, moveIndex),
+				player.getX() * 32, player.getY() * 32, null);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -112,68 +129,70 @@ public class Board extends JPanel implements ActionListener {
 		}
 
 		int dialogButton = JOptionPane.YES_NO_OPTION;
-		//if player is on bomb
-		if(m.getMap(player.getX(), player.getY()).equals("N")) {
+		// if player is on bomb
+		if (m.getMap(player.getX(), player.getY()).equals("N")) {
 			m.changeMapField(player.getX(), player.getY(), '0');
-			int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to start again?", "YOU ARE DEAD!", dialogButton);
+			int dialogResult = JOptionPane.showConfirmDialog(null,
+					"Would you like to start again?", "YOU ARE DEAD!",
+					dialogButton);
 			if (dialogResult == JOptionPane.YES_OPTION) {
 				JOptionPane.getRootFrame();
 				m = new Map(level);
 				player = new Player(1, 1, null, 0);
-			}
-			else {
+			} else {
 				System.exit(0);
 			}
 		}
-		
-		//if player is on Exit
+
+		// if player is on Exit
 		if (level < 2) {
 			if (m.getMap(player.getX(), player.getY()).equals("e")) {
-				int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to start the next level?", "YOU PASSED THE LEVEL!", dialogButton);
+				int dialogResult = JOptionPane.showConfirmDialog(null,
+						"Would you like to start the next level?",
+						"YOU PASSED THE LEVEL!", dialogButton);
 				if (dialogResult == JOptionPane.YES_OPTION) {
 					level++;
 					JOptionPane.getRootFrame();
 					m = new Map(level);
 					player = new Player(1, 1, null, 0);
-				}
-				else {
+				} else {
 					System.exit(0);
 				}
 			}
-		}
-		else {
+		} else {
 			if (m.getMap(player.getX(), player.getY()).equals("e")) {
-				int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to restart the game?", "CONGRATULATIONS! YOU WON!!!", dialogButton);
+				int dialogResult = JOptionPane.showConfirmDialog(null,
+						"Would you like to restart the game?",
+						"CONGRATULATIONS! YOU WON!!!", dialogButton);
 				if (dialogResult == JOptionPane.YES_OPTION) {
 					level = 1;
 					JOptionPane.getRootFrame();
 					m = new Map(level);
 					player = new Player(1, 1, null, 0);
-				}
-				else {
+				} else {
 					System.exit(0);
 				}
 			}
 		}
 	}
 
-//	public void keyReleased(KeyEvent event) {
-//		int key = event.getKeyCode();
-//		if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
-//			moveDirection = null;
-//			moveIndex = 0;
-//		}
-//		if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
-//			moveDirection = null;
-//			moveIndex = 0;
-//		}
-//		if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
-//			moveDirection = null;
-//			moveIndex = 0;
-//		}
-//		if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
-//			moveDirection = null;
-//			moveIndex = 0;
-//		}
-//	}
+	// public void keyReleased(KeyEvent event) {
+	// int key = event.getKeyCode();
+	// if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
+	// moveDirection = null;
+	// moveIndex = 0;
+	// }
+	// if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
+	// moveDirection = null;
+	// moveIndex = 0;
+	// }
+	// if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
+	// moveDirection = null;
+	// moveIndex = 0;
+	// }
+	// if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
+	// moveDirection = null;
+	// moveIndex = 0;
+	// }
+	// }
 }
