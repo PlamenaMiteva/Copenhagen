@@ -8,8 +8,6 @@ public class Player {
 	private int playerX, playerY;
 	private Image playerImage;
 	private int velocity;
-//	private String moveDirection;
-//	private int moveIndex;
 	private int wins; // Amount of labyrinths passed
 
 	public static boolean goingUp;

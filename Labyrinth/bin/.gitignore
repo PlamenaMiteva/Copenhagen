@@ -1,8 +1,12 @@
+/game/
 /ground.png
 /map1.txt
 /player.png
-/wall.png
-/turtleImage.png
+/turtleImageDown1.png
+/turtleImageDown2.png
+/turtleImageDown3.png
+/turtleImageDown4.png
+/turtleImageDown5.png
 /turtleImageLeft1.png
 /turtleImageLeft2.png
 /turtleImageLeft3.png
@@ -13,4 +17,10 @@
 /turtleImageRight3.png
 /turtleImageRight4.png
 /turtleImageRight5.png
-/game/
+/turtleImageUp1.png
+/turtleImageUp2.png
+/turtleImageUp3.png
+/turtleImageUp4.png
+/turtleImageUp5.png
+/turtleImagenull0.png
+/wall.png

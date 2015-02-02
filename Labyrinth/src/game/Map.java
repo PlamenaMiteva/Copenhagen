@@ -107,4 +107,8 @@ public class Map {
 		String index = map[y].substring(x, x + 1);
 		return index;
 	}
+	
+	public void changeMapField(int x, int y, char letter) {
+		map[y] = new String(map[y].substring(0, x) + letter + map[y].substring(x + 1, 28));
+	}
 }

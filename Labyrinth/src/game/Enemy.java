@@ -23,7 +23,6 @@ public class Enemy {
 
 		ImageIcon image = new ImageIcon("enemy.png");
 
-		
 		this.enemyImage = image.getImage();
 		this.x = enemyX;
 		this.y = enemyY;
@@ -36,8 +35,6 @@ public class Enemy {
 	//	enemyAtmap = new String[14]; 
 
 		}
-
-	
 
 	public Image getEnemy() {
 		return enemyImage;
@@ -55,5 +52,4 @@ public class Enemy {
 		x += moveX;
 		y += moveY;
 	}
-
 }
