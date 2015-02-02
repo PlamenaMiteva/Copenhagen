@@ -18,12 +18,13 @@ public class Board extends JPanel implements ActionListener {
 		enemy = new Enemy(2,2);
 
 
-		addKeyListener(new ActionsTaken());
+		addKeyListener(new ActionsTaken(this));
 		setFocusable(true);
 
 		timer = new Timer(5, this);
 		timer.start();
 	}
+	
 
 	public void paint(Graphics g) {
 		super.paintComponents(g);
@@ -70,45 +71,43 @@ public class Board extends JPanel implements ActionListener {
 		}
 	}
 
-	public class ActionsTaken extends KeyAdapter {
-		public void keyPressed(KeyEvent event) {
+	public void keyPressed(KeyEvent event) {
 
-			// playing with WASD or UP, DOWN, LEFT, RIGHT arrows
-			int key = event.getKeyCode();
+		// playing with WASD or UP, DOWN, LEFT, RIGHT arrows
+		int key = event.getKeyCode();
 
-			// up
-			if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
-				if (!m.getMap(player.getX(), player.getY() - 1).equals(".")
-						&& !m.getMap(player.getX(), player.getY() - 1).equals(
-								"x")) {
-					player.move(0, -1);
-				}
+		// up
+		if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
+			if (!m.getMap(player.getX(), player.getY() - 1).equals(".")
+					&& !m.getMap(player.getX(), player.getY() - 1).equals(
+							"x")) {
+				player.move(0, -1);
 			}
+		}
 
-			// down
-			else if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
-				if (!m.getMap(player.getX(), player.getY() + 1).equals(".")
-						&& !m.getMap(player.getX(), player.getY() + 1).equals(
-								"x")) {
-					player.move(0, 1);
-				}
+		// down
+		else if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
+			if (!m.getMap(player.getX(), player.getY() + 1).equals(".")
+					&& !m.getMap(player.getX(), player.getY() + 1).equals(
+							"x")) {
+				player.move(0, 1);
 			}
+		}
 
-			// left
-			else if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
-				if (!m.getMap(player.getX() - 1, player.getY()).equals(".")
-						&& !m.getMap(player.getX() - 1, player.getY()).equals(
-								"x")) {
-					player.move(-1, 0);
-				}
+		// left
+		else if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
+			if (!m.getMap(player.getX() - 1, player.getY()).equals(".")
+					&& !m.getMap(player.getX() - 1, player.getY()).equals(
+							"x")) {
+				player.move(-1, 0);
 			}
-			// right
-			else if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
-				if (!m.getMap(player.getX() + 1, player.getY()).equals(".")
-						&& !m.getMap(player.getX() + 1, player.getY()).equals(
-								"x")) {
-					player.move(1, 0);
-				}
+		}
+		// right
+		else if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
+			if (!m.getMap(player.getX() + 1, player.getY()).equals(".")
+					&& !m.getMap(player.getX() + 1, player.getY()).equals(
+							"x")) {
+				player.move(1, 0);
 			}
 		}
 	}
