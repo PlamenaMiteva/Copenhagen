@@ -9,7 +9,7 @@ public class Labyrinth extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Labyrinth");
 		setSize(900, 450);
-		setResizable(false);
+//		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

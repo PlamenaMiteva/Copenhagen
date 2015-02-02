@@ -11,10 +11,12 @@ public class Board extends JPanel implements ActionListener {
 	private Map m;
 	private Enemy enemy;
 	private int level = 1;
+	private String moveDirection = null;
+	private int moveIndex = 0;
 
 	public Board() {
 		m = new Map(level);
-		player = new Player(1,1);
+		player = new Player(1, 1, null, 0);
 		enemy = new Enemy(2,2);
 
 
@@ -24,7 +26,7 @@ public class Board extends JPanel implements ActionListener {
 		timer = new Timer(5, this);
 		timer.start();
 	}
-	
+
 
 	public void paint(Graphics g) {
 		super.paintComponents(g);
@@ -36,22 +38,23 @@ public class Board extends JPanel implements ActionListener {
 				} else if (m.getMap(x, y).equals(".")) {
 					g.drawImage(m.getWall(), x * 32, y * 32, null);
 				} else if (m.getMap(x, y).equals("e")) {
-					g.drawImage(m.getExit(), x * 32, y * 32, null);
+					g.drawImage(m.getExit(), x * 32, y * 32,  null);
 				} else if (m.getMap(x, y).equals("x")) {
 					g.drawImage(m.getDoor(), x * 32, y * 32, null);
 				}
-				
+
 			}
 		}
-		g.drawImage(player.getPlayer(), player.getX() * 32, player.getY() * 32,
-				null);
+//		g.drawImage(player.getPlayer(), player.getX() * 32, player.getY() * 32,
+//				null);
+		g.drawImage(player.getPlayer(moveDirection, moveIndex), player.getX() * 32, player.getY() * 32, null);
 		g.drawImage(enemy.getEnemy(), enemy.getX() * 32, enemy.getY() * 32,
 				null);
-	
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 		repaint();
 		int dialogButton = JOptionPane.YES_NO_OPTION;
 		if (m.getMap(player.getX(), player.getY()).equals("e")) {
@@ -62,9 +65,9 @@ public class Board extends JPanel implements ActionListener {
 				level++;
 				JOptionPane.getRootFrame();
 				m = new Map(level);
-
-				player = new Player(1,1);
 				
+				player = new Player(1, 1, null, 0);
+
 			} else {
 				System.exit(0);
 			}
@@ -79,36 +82,73 @@ public class Board extends JPanel implements ActionListener {
 		// up
 		if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
 			if (!m.getMap(player.getX(), player.getY() - 1).equals(".")
-					&& !m.getMap(player.getX(), player.getY() - 1).equals(
-							"x")) {
+					&& !m.getMap(player.getX(), player.getY() - 1).equals("x")) {
 				player.move(0, -1);
+				moveDirection = "Up";
+				moveIndex++;
+				if (moveIndex == 6) {
+					moveIndex = 1;
+				}
 			}
 		}
 
 		// down
 		else if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
 			if (!m.getMap(player.getX(), player.getY() + 1).equals(".")
-					&& !m.getMap(player.getX(), player.getY() + 1).equals(
-							"x")) {
+					&& !m.getMap(player.getX(), player.getY() + 1).equals("x")) {
 				player.move(0, 1);
+				moveDirection = "Down";
+				moveIndex++;
+				if (moveIndex == 6) {
+					moveIndex = 1;
+				}
 			}
 		}
 
 		// left
 		else if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
 			if (!m.getMap(player.getX() - 1, player.getY()).equals(".")
-					&& !m.getMap(player.getX() - 1, player.getY()).equals(
-							"x")) {
+					&& !m.getMap(player.getX() - 1, player.getY()).equals("x")) {
 				player.move(-1, 0);
+				moveDirection = "Left";
+				moveIndex++;
+				if (moveIndex == 6) {
+					moveIndex = 1;
+				}
 			}
 		}
 		// right
 		else if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
 			if (!m.getMap(player.getX() + 1, player.getY()).equals(".")
-					&& !m.getMap(player.getX() + 1, player.getY()).equals(
-							"x")) {
+					&& !m.getMap(player.getX() + 1, player.getY()).equals("x")) {
 				player.move(1, 0);
+				moveDirection = "Right";
+				moveIndex++;
+				if (moveIndex == 6) {
+					moveIndex = 1;
+				}
 			}
 		}
+	}
+	
+	public void keyReleased(KeyEvent event) {
+		int key = event.getKeyCode();
+		
+		if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
+			moveDirection = null;
+			moveIndex = 0;
+        }
+        if ((key == KeyEvent.VK_S) || (key == KeyEvent.VK_DOWN)) {
+			moveDirection = null;
+			moveIndex = 0;
+        }
+        if ((key == KeyEvent.VK_A) || (key == KeyEvent.VK_LEFT)) {
+			moveDirection = null;
+			moveIndex = 0;
+        }
+        if ((key == KeyEvent.VK_D) || (key == KeyEvent.VK_RIGHT)) {
+			moveDirection = null;
+			moveIndex = 0;
+        }
 	}
 }

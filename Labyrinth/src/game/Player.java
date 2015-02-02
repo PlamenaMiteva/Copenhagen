@@ -1,12 +1,15 @@
 package game;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 public class Player {
 	private int playerX, playerY;
 	private Image playerImage;
 	private int velocity;
+//	private String moveDirection;
+//	private int moveIndex;
 	private int wins; // Amount of labyrinths passed
 
 	public static boolean goingUp;
@@ -14,9 +17,9 @@ public class Player {
     public static boolean goingLeft;
     public static boolean goingRight;
     
-	public Player(int paraX, int paraY) {
+	public Player(int paraX, int paraY, String moveDirection, int moveIndex) {
 
-		ImageIcon image = new ImageIcon("player.png");
+		ImageIcon image = new ImageIcon(".//images//turtleImagenull0.png");
 		
 		goingUp = false;
         goingDown = false;
@@ -30,7 +33,10 @@ public class Player {
 
 	}
 
-	public Image getPlayer() {
+	public Image getPlayer(String moveDirection, int moveIndex) {
+		String imageFileName = ".//images/turtleImage" + moveDirection + moveIndex + ".png";
+		ImageIcon image = new ImageIcon(imageFileName);
+		this.playerImage = image.getImage();
 		return playerImage;
 	}
 
