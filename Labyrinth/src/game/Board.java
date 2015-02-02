@@ -1,9 +1,13 @@
 package game;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 	private Timer timer;
@@ -13,11 +17,15 @@ public class Board extends JPanel implements ActionListener {
 	private int level = 1;
 	private String moveDirection = null;
 	private int moveIndex = 0;
+	
+	
 
 	public Board() {
 		m = new Map(level);
 		player = new Player(1, 1, null, 0);
-		enemy = new Enemy(2,2);
+		enemy = new Enemy(5,9);
+		//Thread enemy1 = new Thread(thr1);
+
 
 
 		addKeyListener(new ActionsTaken(this));
@@ -30,6 +38,8 @@ public class Board extends JPanel implements ActionListener {
 
 	public void paint(Graphics g) {
 		super.paintComponents(g);
+		Thread enemy1 = new Thread();
+		 
 
 		for (int y = 0; y < 14; y++) {
 			for (int x = 0; x < 28; x++) {
@@ -42,21 +52,27 @@ public class Board extends JPanel implements ActionListener {
 				} else if (m.getMap(x, y).equals("x")) {
 					g.drawImage(m.getDoor(), x * 32, y * 32, null);
 				}
-
 			}
 		}
 //		g.drawImage(player.getPlayer(), player.getX() * 32, player.getY() * 32,
 //				null);
 		g.drawImage(player.getPlayer(moveDirection, moveIndex), player.getX() * 32, player.getY() * 32, null);
-		g.drawImage(enemy.getEnemy(), enemy.getX() * 32, enemy.getY() * 32,
-				null);
-
-	}
-
+		g.drawImage(enemy.getEnemy(), enemy.getX() * 32, enemy.getY() * 32, null);
+		
+		}
+	
+	
+	
 	public void actionPerformed(ActionEvent e) {
 
 		repaint();
 		int dialogButton = JOptionPane.YES_NO_OPTION;
+		
+		if(!m.getMap(enemy.getX(),enemy.getY()).equals(m.getMap(player.getX(),player.getY()))){
+			JOptionPane.showMessageDialog(null, "dead");
+
+		}
+		// TODO
 		if (m.getMap(player.getX(), player.getY()).equals("e")) {
 			int dialogResult = JOptionPane.showConfirmDialog(null,
 					"Would you like to start the next level?",
@@ -72,6 +88,7 @@ public class Board extends JPanel implements ActionListener {
 				System.exit(0);
 			}
 		}
+		
 	}
 
 	public void keyPressed(KeyEvent event) {
@@ -79,6 +96,7 @@ public class Board extends JPanel implements ActionListener {
 		// playing with WASD or UP, DOWN, LEFT, RIGHT arrows
 		int key = event.getKeyCode();
 
+		
 		// up
 		if ((key == KeyEvent.VK_W) || (key == KeyEvent.VK_UP)) {
 			if (!m.getMap(player.getX(), player.getY() - 1).equals(".")
@@ -129,6 +147,7 @@ public class Board extends JPanel implements ActionListener {
 				}
 			}
 		}
+	
 	}
 	
 	public void keyReleased(KeyEvent event) {

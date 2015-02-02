@@ -23,16 +23,17 @@ public class Enemy {
 
 		ImageIcon image = new ImageIcon("enemy.png");
 
+		
 		this.enemyImage = image.getImage();
 		this.x = enemyX;
 		this.y = enemyY;
 		
-		try {
-			reader = new BufferedReader(new FileReader("enemyAtmap1.txt"));
-		} catch (Exception e) {
-			System.out.println("Cannot open map file!!!");
-		}
-		enemyAtmap = new String[14]; 
+	//	try {
+	//		reader = new BufferedReader(new FileReader("enemyAtmap1.txt"));
+	//	} catch (Exception e) {
+	//		System.out.println("Cannot open map file!!!");
+	//	}
+	//	enemyAtmap = new String[14]; 
 
 		}
 

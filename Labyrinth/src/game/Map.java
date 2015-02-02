@@ -11,7 +11,7 @@ public class Map {
 	private Scanner input;
 	private int size;
 	private String[] map; //size is the length of the first line in a map
-	private Image ground, wall, exit, door;
+	private Image ground, enemy, wall, exit, door;
 	int level;
 
 	public Map(int Level) {
@@ -24,6 +24,8 @@ public class Map {
 		exit = image.getImage();
 		image = new ImageIcon("door.png");
 		door = image.getImage();
+		image = new ImageIcon("enemy.png");
+		enemy = image.getImage();
 
 		openFile();
 		readFile();
@@ -38,6 +40,9 @@ public class Map {
 		return wall;
 	}
 
+	public Image getEnemy() {
+		return enemy;
+	}
 	public Image getExit() {
 		return exit;
 	}
@@ -67,7 +72,7 @@ public class Map {
 
 			if (dialogResult == JOptionPane.YES_OPTION) {
 				
-				new Labyrinth();
+
 			} else {
 				System.exit(0);
 			
