@@ -31,7 +31,7 @@ public class Board extends JPanel implements ActionListener {
 		addKeyListener(new ActionsTaken(this));
 		setFocusable(true);
 
-		timer = new Timer(5, this);
+		timer = new Timer(25, this);
 		timer.start();
 	}
 
@@ -51,6 +51,8 @@ public class Board extends JPanel implements ActionListener {
 					g.drawImage(m.getExit(), x * 32, y * 32,  null);
 				} else if (m.getMap(x, y).equals("x")) {
 					g.drawImage(m.getDoor(), x * 32, y * 32, null);
+				}else if (m.getMap(x, y).equals("N")) {
+					g.drawImage(m.getEnemy(), x * 32, y * 32, null);
 				}
 			}
 		}
