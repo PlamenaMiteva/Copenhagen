@@ -7,28 +7,26 @@ import javax.swing.*;
 public class Player {
 	private int playerX, playerY;
 	private Image playerImage;
-	private int velocity;
 	private int wins; // Amount of labyrinths passed
 
 	public static boolean goingUp;
-    public static boolean goingDown;
-    public static boolean goingLeft;
-    public static boolean goingRight;
-    
+	public static boolean goingDown;
+	public static boolean goingLeft;
+	public static boolean goingRight;
+
 	public Player(int paraX, int paraY, String moveDirection, int moveIndex) {
 
 		ImageIcon image = new ImageIcon(".//images//turtleImagenull0.png");
-		
+
 		goingUp = false;
-        goingDown = false;
-        goingLeft = false;
-        goingRight = false;
-		
+		goingDown = false;
+		goingLeft = false;
+		goingRight = false;
+
 		this.playerImage = image.getImage();
 		this.playerX = paraX;
 		this.playerY = paraY;
 		this.wins = 0;
-
 	}
 
 	public Image getPlayer(String moveDirection, int moveIndex) {
@@ -50,7 +48,8 @@ public class Player {
 		playerX += x;
 		playerY += y;
 	}
+
 	public int getWins() {
-        return this.wins;
-    }
+		return this.wins;
+	}
 }
