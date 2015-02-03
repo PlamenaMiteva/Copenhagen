@@ -11,8 +11,4 @@ public class ActionsTaken extends KeyAdapter {
 	public void keyPressed(KeyEvent event) {
 		board.keyPressed(event);
 	}
-	
-//	public void keyReleased(KeyEvent event) {
-//		board.keyReleased(event);
-//	}
 }

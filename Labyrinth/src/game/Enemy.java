@@ -1,32 +1,33 @@
 package game;
 
 import java.awt.Image;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.Writer;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 
 public class Enemy {
 	private int enemyX, enemyY;
-	private Image enemyImage;
-	//	private String[] enemyAtmap;
+	private static Image enemyImage;
+	private static Image exImage;
 
+	@SuppressWarnings("static-access")
 	public Enemy(int enemyX, int enemyY) {
 
-		ImageIcon image = new ImageIcon("enemy.png");
+		ImageIcon image = new ImageIcon("./images/enemy.png");
+		ImageIcon explosion = new ImageIcon("./images/explosion.png");
 
+		this.exImage = explosion.getImage();
 		this.enemyImage = image.getImage();
 		this.enemyX = enemyX;
 		this.enemyY = enemyY;
 	}
 
-	public Image getEnemy() {
-		return enemyImage;
+	public static Image getEnemy(String bomb) {
+
+		if (bomb.equals("boom")) {
+			return exImage;
+		} else {
+			return enemyImage;
+		}
 	}
 
 	public int getX() {
@@ -36,7 +37,7 @@ public class Enemy {
 	public int getY() {
 		return enemyY;
 	}
-
+	
 	public void move(int x, int y) {
 		enemyX += x;
 		enemyY += y;
